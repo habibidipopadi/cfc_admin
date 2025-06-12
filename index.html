@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Correctional Facilities</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4a5a4a 0%, #3a4a3a 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Navigation */
+        .top-nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7fb069;
+        }
+
+        /* Main Header with Phoenix Logo */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .phoenix-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .phoenix-logo i {
+            font-size: 80px;
+            color: #7fb069;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4a5a4a 0%, #3a4a3a 100%);
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #3a4a3a;
+            font-size: 28px;
+        }
+
+        .login-phoenix {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-phoenix i {
+            font-size: 60px;
+            color: #7fb069;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #3a4a3a;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #7fb069;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #7fb069 0%, #6a9c5a 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(127, 176, 105, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(127, 176, 105, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 14px;
+            margin: 2px;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-header h1 {
+            color: #3a4a3a;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-actions span {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card h3 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .stat-pending { color: #ffc107; }
+        .stat-cleared { color: #7fb069; }
+        .stat-scheduled { color: #17a2b8; }
+        .stat-completed { color: #6f42c1; }
+
+        /* Controls */
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #7fb069;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-group select {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            min-width: 180px;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #7fb069;
+        }
+
+        /* Table */
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #7fb069 0%, #6a9c5a 100%);
+            color: white;
+            padding: 25px 30px;
+            border-bottom: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+
+        th:hover {
+            background: #e9ecef;
+        }
+
+        th i {
+            margin-left: 8px;
+            font-size: 12px;
+        }
+
+        tbody tr {
+            transition: all 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            color: #856404;
+        }
+
+        .status-cleared {
+            background: linear-gradient(135deg, #d4edda 0%, #7fb069 30%);
+            color: white;
+        }
+
+        .status-scheduled {
+            background: linear-gradient(135deg, #d1ecf1 0%, #17a2b8 30%);
+            color: white;
+        }
+
+        .status-completed {
+            background: linear-gradient(135deg, #e2e3e5 0%, #6f42c1 30%);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.98);
+            margin: 3% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #7fb069 0%, #6a9c5a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: opacity 0.3s;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .detail-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #7fb069;
+        }
+
+        .detail-section h4 {
+            color: #3a4a3a;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 140px;
+            margin-right: 15px;
+        }
+
+        .detail-value {
+            flex: 1;
+            color: #333;
+        }
+
+        .modal-actions {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #7fb069;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 25px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert */
+        .alert {
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            font-weight: 500;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-color: #f5c6cb;
+        }
+
+        .alert-success {
+            color: #155724;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #c3e6cb;
+        }
+
+        /* Export buttons */
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .phoenix-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .phoenix-logo i {
+                font-size: 60px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item {
+                flex-direction: column;
+            }
+
+            .detail-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+
+        /* Hide elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Link styling for navigation */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quick-link {
+            background: rgba(127, 176, 105, 0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quick-link:hover {
+            background: rgba(127, 176, 105, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(127, 176, 105, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-phoenix">
+                <i class="fas fa-dove"></i>
+            </div>
+            <h2>Admin Access</h2>
+            <div id="loginError" class="alert alert-danger hidden">
+                Invalid password. Please try again.
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="password">Enter Admin Password:</label>
+                    <input type="password" id="password" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-full">
+                    <i class="fas fa-sign-in-alt"></i> Access Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-container">
+                <div class="logo-section">
+                    <i class="fas fa-shield-alt" style="margin-right: 10px;"></i>
+                    QFCGY Admin
+                </div>
+                <div class="nav-links">
+                    <a href="#"><i class="fas fa-home"></i> Home</a>
+                    <a href="#"><i class="fas fa-users"></i> Meeting Rooms</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="main-header">
+            <div class="phoenix-logo">
+                <i class="fas fa-dove"></i>
+            </div>
+            <h1 class="main-title">Correctional Facilities</h1>
+            <p class="subtitle">ADMIN DASHBOARD MANAGEMENT</p>
+        </div>
+
+        <div class="container">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1><i class="fas fa-tachometer-alt"></i> Background Check Management</h1>
+                <div class="header-actions">
+                    <span id="lastUpdated">Last updated: Never</span>
+                    <button id="refreshBtn" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button id="logoutBtn" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <a href="#" class="quick-link">Uno Tenemos Dos</a>
+                <a href="#" class="quick-link">Giro Roo Go</a>
+                <a href="#" class="quick-link">Ecobant Charles</a>
+                <a href="#" class="quick-link">Pontones Goes</a>
+                <a href="#" class="quick-link">Cria frontia</a>
+                <a href="#" class="quick-link">Le Clin Charlene</a>
+                <a href="#" class="quick-link">Otro Orientales</a>
+                <a href="#" class="quick-link">Meeting Requests</a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-clock stat-pending"></i>
+                    <h3 id="pendingCount">0</h3>
+                    <p>Pending Review</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle stat-cleared"></i>
+                    <h3 id="clearedCount">0</h3>
+                    <p>Cleared</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check stat-scheduled"></i>
+                    <h3 id="scheduledCount">0</h3>
+                    <p>Scheduled</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-flag-checkered stat-completed"></i>
+                    <h3 id="completedCount">0</h3>
+                    <p>Completed</p>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name, email, or phone...">
+                </div>
+                <div class="filter-group">
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Cleared">Cleared</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <select id="involvementFilter">
+                        <option value="">All Involvement</option>
+                        <option value="Join the CFC Committee">CFC Committee</option>
+                        <option value="Speak at a Correctional Facility">Speak at Facility</option>
+                        <option value="Become a Temporary Contact for Bridging the Gap">Temporary Contact</option>
+                        <option value="Seeking information">Seeking Information</option>
+                    </select>
+                </div>
+                <div class="export-buttons">
+                    <button id="exportCsvBtn" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Form Submissions (<span id="totalCount">0</span>)</h3>
+                </div>
+                <div id="loadingContainer" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading submissions...</p>
+                </div>
+                <div id="tableContainer" class="hidden">
+                    <table id="submissionsTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="timestamp">Date <i class="fas fa-sort"></i></th>
+                                <th data-sort="applicantName">Name <i class="fas fa-sort"></i></th>
+                                <th data-sort="involvement">Involvement <i class="fas fa-sort"></i></th>
+                                <th data-sort="userEmail">Email <i class="fas fa-sort"></i></th>
+                                <th data-sort="status">Status <i class="fas fa-sort"></i></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissionsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Detail Modal -->
+    <div id="submissionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Submission Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-user"></i> Personal Information</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Name:</span>
+                            <span class="detail-value" id="detailApplicantName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">First Name:</span>
+                            <span class="detail-value" id="detailFirstName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Last Name:</span>
+                            <span class="detail-value" id="detailLastName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Birth Name:</span>
+                            <span class="detail-value" id="detailBirthName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Other Names:</span>
+                            <span class="detail-value" id="detailOtherNames"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Date of Birth:</span>
+                            <span class="detail-value" id="detailDateOfBirth"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Gender:</span>
+                            <span class="detail-value" id="detailGender"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Mother's Name:</span>
+                            <span class="detail-value" id="detailMotherName"></span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4><i class="fas fa-home"></i> Contact Information</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Address:</span>
+                            <span class="detail-value" id="detailAddress"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">City:</span>
+                            <span class="detail-value" id="detailCity"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Address Date:</span>
+                            <span class="detail-value" id="detailAddressDate"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Home Phone:</span>
+                            <span class="detail-value" id="detailHomePhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Work Phone:</span>
+                            <span class="detail-value" id="detailWorkPhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Other Phone:</span>
+                            <span class="detail-value" id="detailOtherPhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value" id="detailUserEmail"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">User Phone:</span>
+                            <span class="detail-value" id="detailUserPhone"></span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4><i class="fas fa-handshake"></i> Involvement & Background</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Sobriety Date:</span>
+                            <span class="detail-value" id="detailSobrietyDate"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Involvement:</span>
+                            <span class="detail-value" id="detailInvolvement"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Criminal Record:</span>
+                            <span class="detail-value" id="detailCriminalRecord"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Criminal Details:</span>
+                            <span class="detail-value" id="detailCriminalDetails"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Signature Date:</span>
+                            <span class="detail-value" id="detailSignatureDate"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Submitted:</span>
+                            <span class="detail-value" id="detailTimestamp"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4><i class="fas fa-cog"></i> Status Management</h4>
+                    <div class="detail-item">
+                        <span class="detail-label">Current Status:</span>
+                        <span class="detail-value">
+                            <span id="detailCurrentStatus" class="status-badge"></span>
+                        </span>
+                    </div>
+                    <div class="detail-item" style="margin-top: 20px;">
+                        <span class="detail-label">Update Status:</span>
+                        <span class="detail-value">
+                            <select id="statusUpdateSelect" style="padding: 10px; border-radius: 8px; border: 2px solid #e0e0e0;">
+                                <option value="Pending">Pending Review</option>
+                                <option value="Cleared">Cleared</option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="updateStatusBtn" class="btn btn-success">
+                    <i class="fas fa-save"></i> Update Status
+                </button>
+                <button id="closeModalBtn" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            // Replace with your Google Apps Script Web App URL
+            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbzS9mBLMpqy_LmSbWOjE3UmlK3lY7q0NqIXPQ_A4HE2l3WyiTdYSVxxg0kZ1rhbh83i/exec',
+            // Simple password protection - replace with your desired password
+            ADMIN_PASSWORD: 'admin123',
+            // Auto-refresh interval (in minutes)
+            AUTO_REFRESH_INTERVAL: 5
+        };
+
+        // Global state
+        let allSubmissions = [];
+        let filteredSubmissions = [];
+        let currentSort = { column: 'timestamp', direction: 'desc' };
+        let autoRefreshTimer = null;
+
+        // DOM Elements
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const passwordInput = document.getElementById('password');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const involvementFilter = document.getElementById('involvementFilter');
+        const submissionsTableBody = document.getElementById('submissionsTableBody');
+        const loadingContainer = document.getElementById('loadingContainer');
+        const tableContainer = document.getElementById('tableContainer');
+        const submissionModal = document.getElementById('submissionModal');
+        const exportCsvBtn = document.getElementById('exportCsvBtn');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            setupEventListeners();
+        });
+
+        function checkAuthStatus() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+            if (isLoggedIn) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            loginScreen.classList.remove('hidden');
+            dashboard.classList.add('hidden');
+            passwordInput.focus();
+        }
+
+        function showDashboard() {
+            loginScreen.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+            loadSubmissions();
+            startAutoRefresh();
+        }
+
+        function setupEventListeners() {
+            // Login
+            loginForm.addEventListener('submit', handleLogin);
+            logoutBtn.addEventListener('click', handleLogout);
+
+            // Dashboard controls
+            refreshBtn.addEventListener('click', loadSubmissions);
+            searchInput.addEventListener('input', applyFilters);
+            statusFilter.addEventListener('change', applyFilters);
+            involvementFilter.addEventListener('change', applyFilters);
+            exportCsvBtn.addEventListener('click', exportToCsv);
+
+            // Table sorting
+            document.querySelectorAll('th[data-sort]').forEach(th => {
+                th.addEventListener('click', () => sortTable(th.dataset.sort));
+            });
+
+            // Modal
+            document.querySelector('.close').addEventListener('click', closeModal);
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+            document.getElementById('updateStatusBtn').addEventListener('click', updateStatus);
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === submissionModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = passwordInput.value;
+            
+            if (password === CONFIG.ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                loginError.classList.add('hidden');
+                showDashboard();
+            } else {
+                loginError.classList.remove('hidden');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            stopAutoRefresh();
+            showLogin();
+        }
+
+        function startAutoRefresh() {
+            if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+            autoRefreshTimer = setInterval(loadSubmissions, CONFIG.AUTO_REFRESH_INTERVAL * 60 * 1000);
+        }
+
+        function stopAutoRefresh() {
+            if (autoRefreshTimer) {
+                clearInterval(autoRefreshTimer);
+                autoRefreshTimer = null;
+            }
+        }
+
+        async function loadSubmissions() {
+            try {
+                loadingContainer.classList.remove('hidden');
+                tableContainer.classList.add('hidden');
+
+                // For demo purposes, we'll simulate data since we can't directly read from Google Sheets
+                // In production, you'd implement a GET endpoint in your Google Apps Script
+                const demoData = generateDemoData();
+                
+                allSubmissions = demoData;
+                updateStats();
+                applyFilters();
+                updateLastUpdated();
+
+                loadingContainer.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error loading submissions:', error);
+                alert('Error loading submissions. Please try again.');
+                loadingContainer.classList.add('hidden');
+            }
+        }
+
+        function generateDemoData() {
+            // Demo data for testing - replace with actual Google Sheets integration
+            const statuses = ['Pending', 'Cleared', 'Scheduled', 'Completed'];
+            const involvements = [
+                'Join the CFC Committee',
+                'Speak at a Correctional Facility',
+                'Become a Temporary Contact for Bridging the Gap',
+                'Seeking information'
+            ];
+            
+            const demoSubmissions = [];
+            const names = [
+                'John Smith', 'Marie Dubois', 'David Johnson', 'Sophie Martin',
+                'Robert Wilson', 'Isabelle Tremblay', 'Michael Brown', 'Catherine Roy'
+            ];
+
+            for (let i = 0; i < 25; i++) {
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                const [firstName, lastName] = randomName.split(' ');
+                
+                demoSubmissions.push({
+                    id: i + 1,
+                    timestamp: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+                    applicantName: randomName,
+                    firstName: firstName,
+                    lastName: lastName,
+                    birthName: Math.random() > 0.7 ? randomName : '',
+                    otherNames: Math.random() > 0.8 ? 'Nick' : '',
+                    dateOfBirth: new Date(Date.now() - (20 + Math.random() * 40) * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    gender: Math.random() > 0.5 ? 'Masculin' : 'Féminin',
+                    motherName: 'Jane ' + lastName,
+                    address: `${Math.floor(Math.random() * 9999)} Main St, Apt ${Math.floor(Math.random() * 50)}`,
+                    city: 'Montreal, QC, H1A 1A1',
+                    addressDate: new Date(Date.now() - Math.random() * 5 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    homePhone: `514${Math.floor(Math.random() * 9000000) + 1000000}`,
+                    workPhone: Math.random() > 0.3 ? `514${Math.floor(Math.random() * 9000000) + 1000000}` : '',
+                    otherPhone: Math.random() > 0.7 ? `514${Math.floor(Math.random() * 9000000) + 1000000}` : '',
+                    criminalRecord: Math.random() > 0.9 ? 'Oui' : 'Non',
+                    criminalDetails: Math.random() > 0.9 ? 'Minor traffic violation' : '',
+                    signatureDate: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    userEmail: firstName.toLowerCase() + '.' + lastName.toLowerCase() + '@email.com',
+                    userPhone: `514${Math.floor(Math.random() * 9000000) + 1000000}`,
+                    sobrietyDate: new Date(Date.now() - Math.random() * 10 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    involvement: involvements[Math.floor(Math.random() * involvements.length)],
+                    status: statuses[Math.floor(Math.random() * statuses.length)]
+                });
+            }
+
+            return demoSubmissions;
+        }
+
+        function updateStats() {
+            const stats = allSubmissions.reduce((acc, submission) => {
+                acc[submission.status] = (acc[submission.status] || 0) + 1;
+                return acc;
+            }, {});
+
+            document.getElementById('pendingCount').textContent = stats.Pending || 0;
+            document.getElementById('clearedCount').textContent = stats.Cleared || 0;
+            document.getElementById('scheduledCount').textContent = stats.Scheduled || 0;
+            document.getElementById('completedCount').textContent = stats.Completed || 0;
+        }
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusFilterValue = statusFilter.value;
+            const involvementFilterValue = involvementFilter.value;
+
+            filteredSubmissions = allSubmissions.filter(submission => {
+                const matchesSearch = !searchTerm || 
+                    submission.applicantName.toLowerCase().includes(searchTerm) ||
+                    submission.userEmail.toLowerCase().includes(searchTerm) ||
+                    submission.userPhone.includes(searchTerm);
+
+                const matchesStatus = !statusFilterValue || submission.status === statusFilterValue;
+                const matchesInvolvement = !involvementFilterValue || submission.involvement.includes(involvementFilterValue);
+
+                return matchesSearch && matchesStatus && matchesInvolvement;
+            });
+
+            sortSubmissions();
+            renderTable();
+            document.getElementById('totalCount').textContent = filteredSubmissions.length;
+        }
+
+        function sortTable(column) {
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'desc';
+            }
+
+            // Update sort indicators
+            document.querySelectorAll('th i').forEach(icon => {
+                icon.className = 'fas fa-sort';
+            });
+
+            const activeIcon = document.querySelector(`th[data-sort="${column}"] i`);
+            activeIcon.className = currentSort.direction === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+
+            sortSubmissions();
+            renderTable();
+        }
+
+        function sortSubmissions() {
+            filteredSubmissions.sort((a, b) => {
+                let valueA = a[currentSort.column];
+                let valueB = b[currentSort.column];
+
+                if (currentSort.column === 'timestamp') {
+                    valueA = new Date(valueA);
+                    valueB = new Date(valueB);
+                } else if (typeof valueA === 'string') {
+                    valueA = valueA.toLowerCase();
+                    valueB = valueB.toLowerCase();
+                }
+
+                if (valueA < valueB) return currentSort.direction === 'asc' ? -1 : 1;
+                if (valueA > valueB) return currentSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        function renderTable() {
+            submissionsTableBody.innerHTML = '';
+
+            filteredSubmissions.forEach(submission => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(submission.timestamp)}</td>
+                    <td>${submission.applicantName}</td>
+                    <td>${truncateText(submission.involvement, 30)}</td>
+                    <td>${submission.userEmail}</td>
+                    <td><span class="status-badge status-${submission.status.toLowerCase()}">${submission.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm" onclick="viewSubmission(${submission.id})">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                    </td>
+                `;
+                submissionsTableBody.appendChild(row);
+            });
+        }
+
+        function viewSubmission(id) {
+            const submission = allSubmissions.find(s => s.id === id);
+            if (!submission) return;
+
+            // Populate modal with submission details
+            document.getElementById('detailApplicantName').textContent = submission.applicantName;
+            document.getElementById('detailFirstName').textContent = submission.firstName;
+            document.getElementById('detailLastName').textContent = submission.lastName;
+            document.getElementById('detailBirthName').textContent = submission.birthName || 'N/A';
+            document.getElementById('detailOtherNames').textContent = submission.otherNames || 'N/A';
+            document.getElementById('detailDateOfBirth').textContent = formatDate(submission.dateOfBirth);
+            document.getElementById('detailGender').textContent = submission.gender;
+            document.getElementById('detailMotherName').textContent = submission.motherName;
+            document.getElementById('detailAddress').textContent = submission.address;
+            document.getElementById('detailCity').textContent = submission.city;
+            document.getElementById('detailAddressDate').textContent = formatDate(submission.addressDate);
+            document.getElementById('detailHomePhone').textContent = submission.homePhone;
+            document.getElementById('detailWorkPhone').textContent = submission.workPhone || 'N/A';
+            document.getElementById('detailOtherPhone').textContent = submission.otherPhone || 'N/A';
+            document.getElementById('detailUserEmail').textContent = submission.userEmail;
+            document.getElementById('detailUserPhone').textContent = submission.userPhone;
+            document.getElementById('detailSobrietyDate').textContent = formatDate(submission.sobrietyDate);
+            document.getElementById('detailInvolvement').textContent = submission.involvement;
+            document.getElementById('detailCriminalRecord').textContent = submission.criminalRecord;
+            document.getElementById('detailCriminalDetails').textContent = submission.criminalDetails || 'N/A';
+            document.getElementById('detailSignatureDate').textContent = formatDate(submission.signatureDate);
+            document.getElementById('detailTimestamp').textContent = formatDateTime(submission.timestamp);
+
+            const statusBadge = document.getElementById('detailCurrentStatus');
+            statusBadge.textContent = submission.status;
+            statusBadge.className = `status-badge status-${submission.status.toLowerCase()}`;
+
+            document.getElementById('statusUpdateSelect').value = submission.status;
+
+            // Store current submission ID for updates
+            submissionModal.dataset.submissionId = id;
+
+            submissionModal.style.display = 'block';
+        }
+
+        function closeModal() {
+            submissionModal.style.display = 'none';
+        }
+
+        function updateStatus() {
+            const submissionId = submissionModal.dataset.submissionId;
+            const newStatus = document.getElementById('statusUpdateSelect').value;
+            
+            const submission = allSubmissions.find(s => s.id == submissionId);
+            if (submission) {
+                submission.status = newStatus;
+                updateStats();
+                applyFilters();
+                
+                // Update modal display
+                const statusBadge = document.getElementById('detailCurrentStatus');
+                statusBadge.textContent = newStatus;
+                statusBadge.className = `status-badge status-${newStatus.toLowerCase()}`;
+
+                alert('Status updated successfully!');
+                
+                // In production, you would also update this in Google Sheets
+                // updateStatusInSheets(submissionId, newStatus);
+            }
+        }
+
+        function exportToCsv() {
+            const headers = [
+                'Date', 'Applicant Name', 'First Name', 'Last Name', 'Email', 'Phone',
+                'Gender', 'Date of Birth', 'Sobriety Date', 'Involvement', 'Status',
+                'Address', 'City', 'Criminal Record', 'Criminal Details'
+            ];
+
+            const csvContent = [
+                headers.join(','),
+                ...filteredSubmissions.map(submission => [
+                    formatDate(submission.timestamp),
+                    `"${submission.applicantName}"`,
+                    `"${submission.firstName}"`,
+                    `"${submission.lastName}"`,
+                    submission.userEmail,
+                    submission.userPhone,
+                    submission.gender,
+                    formatDate(submission.dateOfBirth),
+                    formatDate(submission.sobrietyDate),
+                    `"${submission.involvement}"`,
+                    submission.status,
+                    `"${submission.address}"`,
+                    `"${submission.city}"`,
+                    submission.criminalRecord,
+                    `"${submission.criminalDetails || ''}"`
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `background_check_submissions_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function updateLastUpdated() {
+            document.getElementById('lastUpdated').textContent = 
+                `Last updated: ${new Date().toLocaleTimeString()}`;
+        }
+
+        // Utility functions
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            return new Date(dateString).toLocaleDateString();
+        }
+
+        function formatDateTime(dateString) {
+            if (!dateString) return 'N/A';
+            return new Date(dateString).toLocaleString();
+        }
+
+        function truncateText(text, maxLength) {
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+
+        // Make viewSubmission available globally
+        window.viewSubmission = viewSubmission;
+    </script>
+</body>
+</html>
