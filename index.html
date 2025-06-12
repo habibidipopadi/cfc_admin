@@ -708,6 +708,216 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(127, 176, 105, 0.4);
         }
+
+        /* Calendar Section */
+        .calendar-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #7fb069 0%, #6a9c5a 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .calendar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-container {
+            padding: 30px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .calendar-header h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3a4a3a;
+            margin: 0;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .calendar-day-header {
+            background: #f8f9fa;
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .calendar-day {
+            background: white;
+            padding: 15px 5px;
+            text-align: center;
+            min-height: 60px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .calendar-day:hover {
+            background: #f8f9fa;
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+            background: #f8f9fa;
+        }
+
+        .calendar-day.today {
+            background: #7fb069;
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.has-event {
+            background: #e3f2fd;
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #2196f3;
+            border-radius: 50%;
+        }
+
+        .calendar-events {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #7fb069;
+        }
+
+        .calendar-events h4 {
+            color: #3a4a3a;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .events-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #7fb069;
+        }
+
+        .event-time {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .event-title {
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .event-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .no-events {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        /* Google Calendar Integration Notice */
+        .calendar-notice {
+            background: #e8f5e8;
+            border: 1px solid #c8e6c9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #2e7d32;
+            font-size: 14px;
+        }
+
+        .calendar-notice i {
+            margin-right: 8px;
+            color: #4caf50;
+        }
+
+        /* Responsive Calendar */
+        @media (max-width: 768px) {
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .calendar-day {
+                min-height: 40px;
+                padding: 8px 3px;
+                font-size: 14px;
+            }
+
+            .calendar-day-header {
+                padding: 10px 3px;
+                font-size: 12px;
+            }
+
+            .calendar-container {
+                padding: 20px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -776,14 +986,53 @@
 
             <!-- Quick Links -->
             <div class="quick-links">
-                <a href="#" class="quick-link">Uno Tenemos Dos</a>
-                <a href="#" class="quick-link">Giro Roo Go</a>
-                <a href="#" class="quick-link">Ecobant Charles</a>
-                <a href="#" class="quick-link">Pontones Goes</a>
-                <a href="#" class="quick-link">Cria frontia</a>
-                <a href="#" class="quick-link">Le Clin Charlene</a>
-                <a href="#" class="quick-link">Otro Orientales</a>
-                <a href="#" class="quick-link">Meeting Requests</a>
+                <a href="#" class="quick-link">BTG Volunteer Info</a>
+                <a href="#" class="quick-link">BTG Sign Up</a>
+                <a href="#" class="quick-link">Bordeaux Speakers</a>
+                <a href="#" class="quick-link">Bordeaux Form</a>
+                <a href="#" class="quick-link">CFC SignUp</a>
+                <a href="#" class="quick-link">La Cite Speakers</a>
+                <a href="#" class="quick-link">CFC Guidelines</a>
+                <a href="#" class="quick-link">Meeting Minutes</a>
+            </div>
+
+            <!-- Google Calendar Integration -->
+            <div class="calendar-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Meeting Calendar</h2>
+                    <div class="calendar-actions">
+                        <button id="addEventBtn" class="btn btn-sm">
+                            <i class="fas fa-plus"></i> Add Event
+                        </button>
+                        <button id="syncCalendarBtn" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-sync-alt"></i> Sync
+                        </button>
+                    </div>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-notice">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Demo Mode:</strong> This calendar shows sample events. To connect with your Google Calendar, you'll need to set up Google Calendar API integration.
+                    </div>
+                    <div class="calendar-header">
+                        <button id="prevMonth" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h3 id="currentMonth">June 2025</h3>
+                        <button id="nextMonth" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div id="calendarGrid" class="calendar-grid">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                    <div class="calendar-events">
+                        <h4><i class="fas fa-list"></i> Upcoming Events</h4>
+                        <div id="eventsList" class="events-list">
+                            <!-- Events will be loaded from Google Calendar -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Stats Cards -->
@@ -1043,10 +1292,9 @@
         const submissionModal = document.getElementById('submissionModal');
         const exportCsvBtn = document.getElementById('exportCsvBtn');
 
-        // Initialize
+        // Initialize everything when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            checkAuthStatus();
-            setupEventListeners();
+            initializeDashboardWithCalendar();
         });
 
         function checkAuthStatus() {
@@ -1428,6 +1676,215 @@
 
         // Make viewSubmission available globally
         window.viewSubmission = viewSubmission;
+
+        // Calendar functionality
+        let currentCalendarDate = new Date();
+        let calendarEvents = [];
+
+        // Initialize calendar
+        function initializeCalendar() {
+            generateCalendar(currentCalendarDate);
+            loadCalendarEvents();
+            setupCalendarEventListeners();
+        }
+
+        function setupCalendarEventListeners() {
+            document.getElementById('prevMonth').addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                generateCalendar(currentCalendarDate);
+            });
+
+            document.getElementById('nextMonth').addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                generateCalendar(currentCalendarDate);
+            });
+
+            document.getElementById('addEventBtn').addEventListener('click', () => {
+                // In production, this would open Google Calendar or a modal to add events
+                alert('This would open Google Calendar to add a new event. Integration requires Google Calendar API setup.');
+            });
+
+            document.getElementById('syncCalendarBtn').addEventListener('click', () => {
+                loadCalendarEvents();
+            });
+        }
+
+        function generateCalendar(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            
+            // Update month display
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const calendarGrid = document.getElementById('calendarGrid');
+            calendarGrid.innerHTML = '';
+
+            // Day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+
+            // Previous month's trailing days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const dayElement = createDayElement(daysInPrevMonth - i, true);
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Current month's days
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = createDayElement(day, false);
+                
+                // Highlight today
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                    dayElement.classList.add('today');
+                }
+
+                // Check for events
+                const dayDate = new Date(year, month, day);
+                if (hasEventOnDate(dayDate)) {
+                    dayElement.classList.add('has-event');
+                }
+
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Next month's leading days
+            const totalCells = calendarGrid.children.length - 7; // Subtract day headers
+            const remainingCells = 42 - totalCells; // 6 rows * 7 days = 42
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayElement = createDayElement(day, true);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function createDayElement(day, isOtherMonth) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            if (isOtherMonth) {
+                dayElement.classList.add('other-month');
+            }
+            dayElement.textContent = day;
+            
+            dayElement.addEventListener('click', () => {
+                if (!isOtherMonth) {
+                    const clickedDate = new Date(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth(), day);
+                    showEventsForDate(clickedDate);
+                }
+            });
+
+            return dayElement;
+        }
+
+        function hasEventOnDate(date) {
+            return calendarEvents.some(event => {
+                const eventDate = new Date(event.date);
+                return eventDate.toDateString() === date.toDateString();
+            });
+        }
+
+        function showEventsForDate(date) {
+            const events = calendarEvents.filter(event => {
+                const eventDate = new Date(event.date);
+                return eventDate.toDateString() === date.toDateString();
+            });
+
+            if (events.length > 0) {
+                const eventDetails = events.map(event => 
+                    `${event.time} - ${event.title}\n${event.description || ''}`
+                ).join('\n\n');
+                alert(`Events for ${date.toLocaleDateString()}:\n\n${eventDetails}`);
+            } else {
+                alert(`No events scheduled for ${date.toLocaleDateString()}`);
+            }
+        }
+
+        function loadCalendarEvents() {
+            // Demo events - in production, this would load from Google Calendar API
+            calendarEvents = [
+                {
+                    date: new Date(2025, 5, 15), // June 15, 2025
+                    time: '10:00 AM',
+                    title: 'CFC Committee Meeting',
+                    description: 'Monthly committee meeting via Zoom'
+                },
+                {
+                    date: new Date(2025, 5, 18), // June 18, 2025
+                    time: '2:00 PM',
+                    title: 'Bordeaux Prison Visit',
+                    description: 'Speaker session at Bordeaux facility'
+                },
+                {
+                    date: new Date(2025, 5, 22), // June 22, 2025
+                    time: '9:00 AM',
+                    title: 'La Cite Speaker Training',
+                    description: 'New speaker orientation and training'
+                },
+                {
+                    date: new Date(2025, 5, 25), // June 25, 2025
+                    time: '11:00 AM',
+                    title: 'BTG Volunteer Meeting',
+                    description: 'Bridging the Gap volunteer coordination'
+                },
+                {
+                    date: new Date(2025, 5, 30), // June 30, 2025
+                    time: '3:00 PM',
+                    title: 'Monthly Review Meeting',
+                    description: 'Review progress and plan for July'
+                }
+            ];
+
+            updateEventsList();
+            generateCalendar(currentCalendarDate);
+        }
+
+        function updateEventsList() {
+            const eventsList = document.getElementById('eventsList');
+            const today = new Date();
+            
+            // Filter upcoming events (next 30 days)
+            const upcomingEvents = calendarEvents
+                .filter(event => new Date(event.date) >= today)
+                .sort((a, b) => new Date(a.date) - new Date(b.date))
+                .slice(0, 5); // Show next 5 events
+
+            if (upcomingEvents.length === 0) {
+                eventsList.innerHTML = '<div class="no-events">No upcoming events</div>';
+                return;
+            }
+
+            eventsList.innerHTML = upcomingEvents.map(event => `
+                <div class="event-item">
+                    <div class="event-time">${new Date(event.date).toLocaleDateString()} at ${event.time}</div>
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-description">${event.description || ''}</div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize calendar when dashboard loads
+        function initializeDashboardWithCalendar() {
+            checkAuthStatus();
+            setupEventListeners();
+            initializeCalendar();
+        }
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboardWithCalendar();
+        });
     </script>
 </body>
 </html>
